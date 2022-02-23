@@ -13,35 +13,30 @@ import org.springframework.web.bind.annotation.RestController;
 //Controller
 @RestController
 public class HelloWorldController {
-	//GET
-	//URI - /hello-world
-	//method - "Hello World"
 	
 	@Autowired
 	private MessageSource messageSource; 
 
-	@GetMapping(path="/hello-world")
+	@GetMapping(path = "/hello-world")
 	public String helloWorld() {
 		return "Hello World";
 	}
 
-	//hello-world-bean
-	@GetMapping(path="/hello-world-bean")
+	@GetMapping(path = "/hello-world-bean")
 	public HelloWorldBean helloWorldBean() {
-		return new HelloWorldBean("Hello World"); 
+		return new HelloWorldBean("Hello World");
 	}
-
-	@GetMapping(path="/hello-world-bean/path-variable/{name}")
+	
+	///hello-world/path-variable/in28minutes
+	@GetMapping(path = "/hello-world/path-variable/{name}")
 	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
-		return new HelloWorldBean(String.format("Hello World, %s", name)); 
+		return new HelloWorldBean(String.format("Hello World, %s", name));
 	}
 
-	@GetMapping(path="/hello-world-internationalized")
-	public String helloWorldInternationalized( ) {
-		return messageSource.getMessage("good.morning.message", null, "Default Message", LocaleContextHolder.getLocale());
-		//en = "Hello World";
-		//nl = "Goede Morgen"
-		//fr = "Bonjour"
-		//in = "Namaste" 
+	@GetMapping(path = "/hello-world-internationalized")
+	public String helloWorldInternationalized() {
+		return messageSource.getMessage("good.morning.message", null, 
+									LocaleContextHolder.getLocale());
 	}
+
 }
